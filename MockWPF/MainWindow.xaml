@@ -1,0 +1,199 @@
+﻿<Window x:Class="MockWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" 
+        Height="740"
+        Width="1200"
+        MinHeight="480"
+        MinWidth="640"
+        Name="mainWindow"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid Background="White" 
+          VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Height="28"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Grid.Row="0">
+            <Menu Background="Transparent"
+                          Height="23"
+                          VerticalAlignment="Bottom"
+                          IsMainMenu="True" Name="menu"
+                          >
+            <MenuItem Header="_File">
+                <MenuItem Command="{Binding OpenWorkflowCommand}"
+                                      Header="Open Project from Disk...">        
+                </MenuItem>
+                <MenuItem Command="{Binding CDSViewCommand}"
+                                    Header="CDS Packages Managerment">
+                </MenuItem>
+                </MenuItem>
+        </Menu>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0">
+            <ContentPresenter 
+                Name="Toolbox"
+                Content="{Binding FocusedWorkflowItem.Toolbox}">                
+            </ContentPresenter>
+        </Border>
+        <TabControl  ItemsSource="{Binding WorkflowItems}"
+                     SelectedValue="{Binding FocusedWorkflowItem, Mode=TwoWay}"
+                     Name="TabWorkflow" Grid.Row="1" Grid.Column="1">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Style.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="FocusVisualStyle"
+                                                            Value="{x:Null}" />
+                            <Setter Property="Background"
+                                                            Value="{DynamicResource ButtonNormalBackground}" />
+                            <Setter Property="BorderBrush"
+                                                            Value="{DynamicResource ButtonNormalBorder}" />
+                            <Setter Property="BorderThickness"
+                                                            Value="1" />
+                            <Setter Property="Foreground"
+                                                            Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+                            <Setter Property="HorizontalContentAlignment"
+                                                            Value="Center" />
+                            <Setter Property="VerticalContentAlignment"
+                                                            Value="Center" />
+                            <Setter Property="Padding"
+                                                            Value="4" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Border SnapsToDevicePixels="true"
+                                                                            x:Name="Chrome"
+                                                                            Background="{TemplateBinding Background}"
+                                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                                            CornerRadius="2"
+                                                                            Opacity="0" />
+                                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                                      Margin="{TemplateBinding Padding}"
+                                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                                      RecognizesAccessKey="True" />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                                             Value="True">
+                                                <Setter Property="Opacity"
+                                                                                TargetName="Chrome"
+                                                                                Value="1" />
+                                                <Setter Property="Background"
+                                                                                TargetName="Chrome"
+                                                                                Value="{DynamicResource ButtonOverBackground}" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed"
+                                                                             Value="True">
+                                                <Setter Property="Opacity"
+                                                                                TargetName="Chrome"
+                                                                                Value="1" />
+                                                <Setter Property="Background"
+                                                                                TargetName="Chrome"
+                                                                                Value="{DynamicResource ButtonPressedBackground}" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled"
+                                                                             Value="False">
+                                                <Setter Property="Foreground"
+                                                                                Value="#ADADAD" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Style.Resources>
+                    <Setter Property="FocusVisualStyle"
+                                                    Value="{DynamicResource TabItemFocusVisual}" />
+                    <Setter Property="Foreground"
+                                                    Value="Black" />
+                    <Setter Property="Padding"
+                                                    Value="6,1,6,1" />
+                    <Setter Property="BorderBrush"
+                                                    Value="{DynamicResource TabControlNormalBorderBrush}" />
+                    <Setter Property="Background"
+                                                    Value="{DynamicResource ButtonNormalBackground}" />
+                    <Setter Property="HorizontalContentAlignment"
+                                                    Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment"
+                                                    Value="Stretch" />
+                    <Setter Property="Header"
+                                                    Value="{Binding Path=Name}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid SnapsToDevicePixels="true">
+                                    <Border x:Name="Bd"
+                                                                    Background="{TemplateBinding Background}"
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                                    BorderThickness="1,1,1,0">
+                                        <DockPanel x:Name="ContentPanel">
+                                            <Button x:Name="CloseTabButton"
+                                                                            Tag="{Binding}"
+                                                                            Click="CloseTabButton_Click"
+                                                                            Command="{Binding Path=CloseFocusedWorkflowCommand}"
+                                                                            HorizontalAlignment="Center"
+                                                                            Margin="3,0,3,0"
+                                                                            VerticalAlignment="Center"
+                                                                            Width="16"
+                                                                            Height="16"
+                                                                            DockPanel.Dock="Right"
+                                                                            Style="{DynamicResource CloseableTabItemButtonStyle}"
+                                                                            ToolTip="Close Tab">
+                                                <Path x:Name="Path"
+                                                                              Stretch="Fill"
+                                                                              StrokeThickness="0.5"
+                                                                              Stroke="#FF333333"
+                                                                              Fill="#FF969696"
+                                                                              Data="F1 M 2.28484e-007,1.33331L 1.33333,0L 4.00001,2.66669L 6.66667,6.10352e-005L 8,1.33331L 5.33334,4L 8,6.66669L 6.66667,8L 4,5.33331L 1.33333,8L 1.086e-007,6.66669L 2.66667,4L 2.28484e-007,1.33331 Z "
+                                                                              HorizontalAlignment="Stretch"
+                                                                              VerticalAlignment="Stretch" />
+                                            </Button>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ContentPresenter x:Name="Content"
+                                                                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                                          ContentSource="Header"
+                                                                                          RecognizesAccessKey="False"
+                                                                                          HorizontalAlignment="Center"
+                                                                                          VerticalAlignment="Center"
+                                                                                          Margin="{TemplateBinding Padding}" />
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding DesignerView}"></ContentControl>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+            <TabControl.Style>
+                <Style TargetType="{x:Type TabControl}"
+                                               BasedOn="{StaticResource {x:Type TabControl}}">
+                    <Style.Triggers>
+                        <Trigger Property="SelectedValue"
+                                                         Value="{x:Null}">
+                            <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TabControl.Style>
+        </TabControl>
+    </Grid>
+</Window>

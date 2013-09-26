@@ -1,0 +1,119 @@
+﻿<Window x:Class="MockWPF.CDSPackagesManagerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CDS Packages Manager"
+        xmlns:addins="clr-namespace:AddIn;assembly=AddIn"
+        xmlns:my="clr-namespace:MockWPF.UIControls"  
+        Height="450"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Width="670">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="180"/>
+        </Grid.ColumnDefinitions>
+        <TreeView Grid.Row="0" Grid.RowSpan="2" BorderThickness="0" BorderBrush="Transparent" Background="#FFEFEFF2">
+            <TreeViewItem Header="Installed packages" Margin="0,5"></TreeViewItem>
+            <TreeViewItem Header="Online" Margin="0,5"></TreeViewItem>
+            <TreeViewItem Header="Updates" Margin="0,5"></TreeViewItem>
+        </TreeView>
+        <TextBlock Text="Sort by:" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="0" Margin="50,0,0,0" Height="24" Width="200" HorizontalAlignment="Left"></ComboBox>
+        <addins:SearchTextBox x:Name="txtSearch"
+                              Grid.Column="2" 
+                              LabelText="Search Online"
+                              HorizontalAlignment="Right"
+                              Width="180" Height="24" 
+                              SearchEventTimeDelay="00:00:01" 
+                              Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                              >
+        </addins:SearchTextBox>
+        <DataGrid Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedPackage}"
+                  Grid.Column="1" Margin="4,4,4,30" HeadersVisibility="None"  Background="Transparent">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="70" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <Image Width="40" Height="40"></Image>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="24"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Id}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Desciption}"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Install" Width="50" Height="24" Tag="{Binding}" Click="Install_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <my:WorkflowDataPaging  Grid.Column="1"  Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" DataContext="{Binding DataPagingVM}">
+        </my:WorkflowDataPaging>
+        <Grid x:Name="gridDllDetails"  Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Created by:" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.AllAuthors}" Margin="70,0,0,0" Grid.Row="0" HorizontalAlignment="Left"></TextBlock>
+
+            <TextBlock Text="Id:" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.Id}" Margin="20,0,0,0" Grid.Row="1" HorizontalAlignment="Left"></TextBlock>
+
+            <TextBlock Text="Version:" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.Version}" Margin="50,0,0,0" Grid.Row="2" HorizontalAlignment="Left"></TextBlock>
+
+            <TextBlock Text="Last Updated:" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.LastPublished}" Margin="82,0,0,0" Grid.Row="3" HorizontalAlignment="Left"></TextBlock>
+
+            <TextBlock Text="Downloads:" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.DownloadCount}" Margin="70,0,0,0" Grid.Row="4" HorizontalAlignment="Left"></TextBlock>
+
+            <TextBlock Text="Tags:" Grid.Row="5" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.Tags}" Margin="32,0,0,0" Grid.Row="5" HorizontalAlignment="Left"></TextBlock>
+
+            <TextBlock Text="Desciption:" Grid.Row="6" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.Description}" TextWrapping="Wrap" Grid.Row="7" HorizontalAlignment="Left"></TextBlock>
+
+            <TextBlock Text="Dependencies:" Grid.Row="8" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding SelectedPackage.AllDependencySets}" TextWrapping="Wrap" Grid.Row="9" HorizontalAlignment="Left"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+            <Button Content="Setting"  Width="75" Height="26" HorizontalAlignment="Left" Margin="10,0,0,0"></Button>
+            <Button Content="Close" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Width="75" Height="26" Margin="0,0,10,0"></Button>
+        </Grid>
+    </Grid>
+</Window>

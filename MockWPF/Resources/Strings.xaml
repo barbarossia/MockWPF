@@ -1,0 +1,45 @@
+﻿<ResourceDictionary x:Class="MockWPF.Resources.Strings"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="WizardTitle">Import Library</system:String>
+    <system:String x:Key="Step1Title">Import library</system:String>
+    <system:String x:Key="Step2Title">Enter library meta-data</system:String>
+    <system:String x:Key="Step2DisplayNameHelp">This is the display name for this activity when displayed in the Foundry toolbox.</system:String>
+    <system:String x:Key="Step2CategoryHelp">This is the Foundry toolbox category in which this activity will appear.</system:String>
+    <system:String x:Key="Step3Title">Edit activity information</system:String>
+    <system:String x:Key="Step4Title">Locate dependencies</system:String>
+    <system:String x:Key="Step5Title">Review changes and finish import</system:String>
+    <system:String x:Key="Step6Title">Import success!</system:String>
+    <system:String x:Key="ImportWizardDescription">The Import Wizard will guide you through the process of importing a library (DLL) into the system.  Click next to enter information about the library, activities contained in the library, and resolve any dependent DLL’s.</system:String>
+    <system:String x:Key="Step1VersionText">Version:</system:String>
+    <system:String x:Key="Step1DefaultCategory">Default Category:</system:String>
+    <system:String x:Key="Step1Tags">Tags:</system:String>
+    <system:String x:Key="Step1Description">Description:</system:String>
+    <system:String x:Key="Step1Activities">Activities:</system:String>
+    <system:String x:Key="Step1Dependencies">Dependencies:</system:String>
+
+    <system:String x:Key="ReleaseNotes">Release Notes:</system:String>
+    <system:String x:Key="CategoryLabel">Category:</system:String>
+    <system:String x:Key="DeveloperNotesLabel">Developer Notes:</system:String>
+
+    <system:String x:Key="Intro_Page_Friendly_Name">Friendly Name:</system:String>
+    <system:String x:Key="Intro_Page_Default_Category">Default Category:</system:String>
+
+    <system:String x:Key="Edit_LibraryItem_Friendly_Name">Friendly Name:</system:String>
+    <system:String x:Key="Edit_LibraryItem_Instruction">Edit library information</system:String>
+    <system:String x:Key="Edit_Activities_Page_Instruction">Edit activity information and review dependencies</system:String>
+
+    <system:String x:Key="Review_Instruction">Review Changes and finish Import</system:String>
+    <system:String x:Key="DependenciesWithIssuesLabel">DEPENDENCIES</system:String>
+
+    <system:String x:Key="SuccessTitle">Import Success!</system:String>
+    <system:String x:Key="SuccessText">The library has been successfully imported to My Toolbox.</system:String>
+
+    <system:String x:Key="Review_NotAllResolvedMessage">Not all dependencies were located. Click the back button to review activities and dependencies.</system:String>
+
+    <system:String x:Key="SetCategoryNameHelp">Set the category name of all activities.</system:String>
+
+    <system:String x:Key="FriendlyNameHelp">This is the name that will show up in your environment.</system:String>
+</ResourceDictionary>
