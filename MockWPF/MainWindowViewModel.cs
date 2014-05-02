@@ -16,7 +16,7 @@ namespace MockWPF
         public DelegateCommand CDSViewCommand { get; private set; }
         private WorkflowItem focusedWorkflowItem;
         private ObservableCollection<WorkflowItem> workflowItems = new ObservableCollection<WorkflowItem>();
-
+        public DelegateCommand DisableCommand { get; private set; }
         public ObservableCollection<WorkflowItem> WorkflowItems
         {
             get { return workflowItems; }
@@ -44,6 +44,12 @@ namespace MockWPF
         {
             OpenWorkflowCommand = new DelegateCommand(OpenWorkflowCommandExecute);
             CDSViewCommand = new DelegateCommand(CDSViewCommandExecute);
+            DisableCommand = new DelegateCommand(DisableCommandExecute);
+        }
+
+        private void DisableCommandExecute()
+        {
+            FocusedWorkflowItem.SetupCompositeActivityDesinger();
         }
 
         private void CDSViewCommandExecute()

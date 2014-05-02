@@ -21,6 +21,7 @@ namespace AddIn
         private ObservableCollection<WorkflowOutlineNode> workflowOutlineNode;
         private XamlIndexNode xamlNode;
         private List<XamlIndexNode> nodes;
+        private CustomActivityDesigner customActivityDesigner;
 
         public event ActivityFocuceEventHandler ActivityFocuceChanged;
 
@@ -72,10 +73,18 @@ namespace AddIn
                 ConfigureWorkflowDesigner(workflowDesigner);
                 ConfigureWorkflowOutlineNode(workflowDesigner);
                 WorkflowDesigner.ModelChanged += WorkflowDesigner_ModelChanged;
-
             }
         }
 
+        public CustomActivityDesigner CustomActivityDesinger 
+        { 
+            get
+            {
+                if (this.customActivityDesigner == null)
+                    this.customActivityDesigner = new CustomActivityDesigner(workflowDesigner);
+                return customActivityDesigner;
+            }
+        }
         private void ConfigureWorkflowOutlineNode(WorkflowDesigner workflowDesigner)
         {
             if (workflowDesigner == null || workflowDesigner.Context.Services.GetService<ModelService>() == null)
@@ -95,6 +104,10 @@ namespace AddIn
             RaiseDesignerChanged(node);
         }
 
+        public void SetupCompositeActivityDesinger()
+        {
+            this.CustomActivityDesinger.SetupCompositeActivityDesinger();
+        }
         private WorkflowOutlineNode FindFocusedWorkflowOutlineNode()
         {
             ModelItem focusedActivity = this.WorkflowDesigner.Context.Items.GetValue<Selection>().PrimarySelection;

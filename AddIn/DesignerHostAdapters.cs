@@ -31,6 +31,10 @@ namespace AddIn
             this.InitAddIn(name, projectXamlCode);
         }
 
+        public void SetupCompositeActivityDesinger()
+        {
+            proxy.SetupCompositeActivityDesinger();
+        }
         private void InitAddIn(string name, string projectXamlCode)
         {
             this.proxy = Create();
@@ -48,5 +52,6 @@ namespace AddIn
             domain.InitializeLifetimeService();
             return (IDesignerContract)domain.CreateInstanceAndUnwrap(addinType.Assembly.FullName, addinType.FullName);
         }
+
     }
 }

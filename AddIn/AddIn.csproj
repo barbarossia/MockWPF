@@ -89,6 +89,7 @@
     <Compile Include="Converters\ActivityAssemblyItemsToToolboxWrappersConverter.cs" />
     <Compile Include="Converters\ActivityTypeToIconConverter.cs" />
     <Compile Include="Converters\ActivityTypeToToolTipConverter.cs" />
+    <Compile Include="CustomActivityDesigner.cs" />
     <Compile Include="DesignerAddIn.cs" />
     <Compile Include="DesignerHostAdapters.cs" />
     <Compile Include="FileService.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="NameVersionEqualityComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchTextBox.cs" />
+    <Compile Include="SelectPrintContentHelper.cs" />
     <Compile Include="ToolboxControlService.cs" />
     <Compile Include="ToolboxView.xaml.cs">
       <DependentUpon>ToolboxView.xaml</DependentUpon>

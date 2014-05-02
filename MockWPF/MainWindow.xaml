@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" 
         Height="740"
-        Width="1200"
+        Width="960"
         MinHeight="480"
         MinWidth="640"
         Name="mainWindow"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         >
     <Grid Background="White" 
           VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -34,6 +34,9 @@
                 </MenuItem>
                 <MenuItem Command="{Binding CDSViewCommand}"
                                     Header="CDS Packages Managerment">
+                </MenuItem>
+                <MenuItem Command="{Binding DisableCommand}"
+                                Header="Disable">
                 </MenuItem>
                 </MenuItem>
         </Menu>

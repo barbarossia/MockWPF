@@ -60,7 +60,10 @@ namespace MockWPF
 
         public List<ActivityAssemblyItem> References { get; set; }
 
-
+        public void SetupCompositeActivityDesinger()
+        {
+            WorkflowDesigner.SetupCompositeActivityDesinger();
+        }
         public int CompareTo(WorkflowItem otherObject)
         {
             // Return less than if the inbound assembly is null, this is unexpected but possible

@@ -93,6 +93,11 @@ namespace AddIn
             Dispose();
         }
 
+        public void SetupCompositeActivityDesinger()
+        {
+            WorkflowEditorVM.CustomActivityDesinger.SetupCompositeActivityDesinger();
+        }
+
         public void Dispose()
         {
             Dispose(true);

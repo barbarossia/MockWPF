@@ -11,5 +11,6 @@ namespace AddIn
         INativeHandleContract WorkflowEditorView { get; }
         INativeHandleContract ToolboxView { get; }
         void InitWorkflow(string name, string xaml);
+        void SetupCompositeActivityDesinger();
     }
 }
